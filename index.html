@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>統合リアルタイム地震サイネージ</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="normal-mode" class="mode-container">
+        <div id="left-pane">
+            <h2 class="pane-title">地震情報履歴 (最大50件)</h2>
+            <div class="table-container">
+                <table id="eq-list-table">
+                    <thead>
+                        <tr>
+                            <th>発生時刻</th>
+                            <th>震源地</th>
+                            <th>M</th>
+                            <th>最大震度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="right-pane">
+            <div id="map-normal" class="map-container"></div>
+            <div id="status-panel">
+                <p id="eew-status">現在、緊急地震速報は発表されていません。</p>
+                <time id="current-time"></time>
+            </div>
+        </div>
+    </div>
+
+    <div id="alert-mode" class="mode-container">
+        <div class="info-block" id="area-main">
+            <div id="alert-title"></div>
+            <div class="main-info-flex">
+                <div id="alert-max-intensity"></div>
+                <div class="hypo-mag-group">
+                    <div id="alert-hypocenter"></div>
+                    <div id="alert-magnitude"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-block" id="area-details">
+            <div class="detail-grid">
+                <div><span class="label">発生時刻</span><span id="alert-origin-time"></span></div>
+                <div><span class="label">発表時刻</span><span id="alert-announced-time"></span></div>
+                <div><span class="label">震源の深さ</span><span id="alert-depth"></span></div>
+                <div><span class="label">緯度</span><span id="alert-latitude"></span></div>
+                <div><span class="label">経度</span><span id="alert-longitude"></span></div>
+            </div>
+        </div>
+        
+        <div class="info-block" id="area-warn-map">
+            <div id="warn-area-container">
+                <h3>警報対象地域</h3>
+                <div id="warn-area-list"></div>
+            </div>
+            <div id="map-alert" class="map-container"></div>
+        </div>
+
+        <div class="info-block" id="area-status">
+             <div class="detail-grid">
+                <div><span class="label">イベントID</span><span id="alert-event-id"></span></div>
+                <div><span class="label">報数</span><span id="alert-serial"></span></div>
+                <div><span class="label">震央精度</span><span id="alert-acc-epicenter"></span></div>
+                <div><span class="label">深さ精度</span><span id="alert-acc-depth"></span></div>
+                <div><span class="label">M精度</span><span id="alert-acc-magnitude"></span></div>
+                <div><span class="label">震度変化</span><span id="alert-maxint-change"></span></div>
+            </div>
+        </div>
+
+        <div class="info-block" id="area-flags">
+            </div>
+
+        <div class="info-block" id="area-original-text">
+            <h3>発表原文</h3>
+            <textarea id="alert-original-text" readonly></textarea>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <script src="app.js"></script>
+</body>
+</html>
